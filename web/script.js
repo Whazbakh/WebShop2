@@ -51,14 +51,14 @@ function addItemsToTable(items) {
     }
 }
 
-function signUp(o) {
+function logIn(o) {
     var userName = o.parentNode.previousSibling.previousSibling.firstChild.nodeValue;
     var password = o.parentNode.previousSibling.firstChild.nodeValue;
-
-}
-
-function logIn(o) {
-
+    sendRequest("POST", "rest/shop/login", null, function (itemsText) {
+        //This code is called when the server has sent its data
+        var items = JSON.parse(itemsText);
+        addItemsToTable(items);
+    });
 }
 
 /////////////////////////////////////////////////////

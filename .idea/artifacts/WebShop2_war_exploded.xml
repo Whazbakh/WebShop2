@@ -9,9 +9,10 @@
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Jersey-2.2" />
-          <element id="file-copy" path="$PROJECT_DIR$/../../WebTek/cloud/out/artifacts/cloud_jar/cloud.jar" />
+          <element id="file-copy" path="$USER_HOME$/WebTek/cloud/out/artifacts/cloud_jar/cloud.jar" />
           <element id="library" level="project" name="com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.8.7" />
           <element id="library" level="project" name="org.json:json:20140107" />
+          <element id="file-copy" path="$PROJECT_DIR$/../cloud/out/artifacts/cloud_jar/cloud.jar" />
         </element>
       </element>
     </root>
