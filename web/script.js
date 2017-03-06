@@ -55,7 +55,7 @@ function signUp(o) {
     var signUpButton = document.getElementById("signUp");
     addEventListener(signUpButton, "click", function () {
         //Same as above, get the items from the server
-        sendRequest("GET", "rest/shop/items", null, function (itemsText) {
+        sendRequest("POST", "rest/shop/login", null, function (itemsText) {
             //This code is called when the server has sent its data
             var items = JSON.parse(itemsText);
             addItemsToTable(items);
