@@ -1,0 +1,59 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 80%;
+    margin: auto;
+    background-color: rgb(225, 225, 225);
+}
+
+table {
+    width: 100%;
+}
+
+td {
+    text-align: center;
+}
+
+#productTable {
+    table-layout: fixed;
+}
+
+#titleTR {
+
+}
+
+#titleTD {
+
+}
+
+#leftTD {
+    width: 75%;
+    border: 1px solid red;
+    padding: 2px;
+}
+
+#rightTD {
+    min-width: 25%;
+    border: 1px solid blue;
+}
+
+#Greg {
+    width: 100%;
+}
+
+#rightFixedDiv {
+    position: fixed;
+    right: 10.2%;
+    left: 70.1%;
+    bottom: 0;
+}
+
+#plip {
+    position: fixed;
+    right: 10.2%;
+    left: 70.1%;
+    top: 0;
+}

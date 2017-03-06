@@ -33,6 +33,15 @@ function addItemsToTable(items) {
         //Create a new line for this item
         var tr = document.createElement("tr");
 
+        var imageCell = document.createElement("td");
+        var image = document.createElement("img");
+        image.setAttribute("src", item.url);
+        image.setAttribute("width", "200");
+        image.setAttribute("height", "200");
+        image.setAttribute("border", "1px solid blue");
+        imageCell.appendChild(image);
+        tr.appendChild(imageCell);
+
         var nameCell = document.createElement("td");
         nameCell.textContent = item.name;
         tr.appendChild(nameCell);
@@ -44,7 +53,6 @@ function addItemsToTable(items) {
         var stockCell = document.createElement("td");
         stockCell.textContent = item.stock;
         tr.appendChild(stockCell);
-        tableBody.appendChild(tr);
 
         var descriptionCell = document.createElement("td");
         descriptionCell.textContent = item.description;
