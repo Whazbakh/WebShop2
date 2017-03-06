@@ -53,15 +53,12 @@ function addItemsToTable(items) {
 
 function signUp(o) {
     var signUpButton = document.getElementById("signUp");
-    addEventListener(signUpButton, "click", function () {
-        //Same as above, get the items from the server
-        sendRequest("GET", "rest/shop/items", null, function (itemsText) {
-            //This code is called when the server has sent its data
-            var items = JSON.parse(itemsText);
-            addItemsToTable(items);
-        });
-    });
-}
+    var userName = o.parentNode.previousSibling.previousSibling.firstChild.nodeValue;
+    var password = o.parentNode.previousSibling.firstChild.nodeValue;
+        addEventListener(signUpButton, "click", function () {
+            //VORES FUNKION HER
+            });
+        }
 
 /////////////////////////////////////////////////////
 // Code from slides
@@ -89,7 +86,7 @@ else
 function sendRequest(httpMethod, url, body, responseHandler) {
     http.open(httpMethod, url);
     if (httpMethod == "POST") {
-        http.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        http.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     }
     http.onreadystatechange = function () {
         if (http.readyState == 4 && http.status == 200) {
