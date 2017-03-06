@@ -52,13 +52,14 @@ function addItemsToTable(items) {
 }
 
 function signUp(o) {
-    var signUpButton = document.getElementById("signUp");
     var userName = o.parentNode.previousSibling.previousSibling.firstChild.nodeValue;
     var password = o.parentNode.previousSibling.firstChild.nodeValue;
-        addEventListener(signUpButton, "click", function () {
-            //VORES FUNKION HER
-            });
-        }
+
+}
+
+function logIn(o) {
+
+}
 
 /////////////////////////////////////////////////////
 // Code from slides
