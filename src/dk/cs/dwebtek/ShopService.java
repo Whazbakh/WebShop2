@@ -10,9 +10,7 @@ import org.json.JSONObject;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
@@ -84,6 +82,21 @@ public class ShopService {
         int stock = Integer.parseInt(e.getChildText("itemStock", NS));
         String description = e.getChild("itemDescription", NS).getValue();
         return new Item(id, name, URL, price, stock, description);
+    }
+
+    @POST
+    @Path("login")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public Customer login(@FormParam("customerName") String customerName, @FormParam("customerPass") String customerPass) {
+        OperationResult<Document> result = service.login(customerName, customerPass);
+        if(result.isSuccess()) {
+            int id = Integer.parseInt(result.getResult().getRootElement().getChildText("customerID", NS));
+            return new Customer(id, customerName);
+        } else {
+            System.out.println(result.getMessage());
+            return null;
+        }
     }
 
     @GET

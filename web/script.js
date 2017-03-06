@@ -44,7 +44,6 @@ function addItemsToTable(items) {
         var stockCell = document.createElement("td");
         stockCell.textContent = item.stock;
         tr.appendChild(stockCell);
-        tableBody.appendChild(tr);
 
         var descriptionCell = document.createElement("td");
         descriptionCell.textContent = item.description;
