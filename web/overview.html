@@ -3,23 +3,67 @@
 <head>
     <title>My web shop</title>
     <script type="text/javascript" src="/script.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<table style="border: 1px solid gray">
-    <thead>
-    <tr>
-        <td>Name</td>
-        <td>Price</td>
-        <td>Stock</td>
-        <td>Description</td>
-        <td>Picture</td>
+<table id="outerTable">
+    <tr id="titleTR">
+        <td id="titleTD">
+            <img src="https://s24.postimg.org/65j45jvxx/Untitled_2.jpg" alt="Titel" width="100%">
+        </td>
     </tr>
-    </thead>
+    <tr>
+        <td>
+            <input type="text">
+            <input type="text">
+            <input type="button" value="Sign In" id="signIn">
+            <input type="button" value="Sign Up" id="signUp">
+            <input type="button" value="Update table from server!" id="update">
+        </td>
+    </tr>
+    <tr id="outerTR">
+        <td id="leftTD">
+            <div class="wrapperDiv">
+                <table class="wrapperTable" id="productTable">
+                    <thead>
+                    <tr>
+                        <td>Picture</td>
+                        <td>Name</td>
+                        <td>Price</td>
+                        <td>Stock</td>
+                        <td>Description</td>
+                    </tr>
+                    </thead>
 
-    <tbody id="itemtablebody">
+                    <tbody id="itemtablebody">
 
-    </tbody>
+                    </tbody>
+                </table>
+            </div>
+        </td>
+        <td id="rightTD">
+            <div class="wrapperDiv">
+                <table class="wrapperTable">
+                    <tr>
+                        <td>
+                            <div id="rightTopFixedDiv">
+                                Hallo
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="rightInnerTD">
+                            <div id="rightBottomFixedDiv">
+                                <img id="Greg" src="https://s1.postimg.org/knkp06rhr/gregssidehj_lper.jpg"
+                                     alt="Grzegorz">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </td>
+    </tr>
 </table>
-<input type="button" value="Update table from server!" id="update">
+
 </body>
 </html>
