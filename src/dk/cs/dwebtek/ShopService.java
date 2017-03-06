@@ -87,7 +87,7 @@ public class ShopService {
     @POST
     @Path("login")
     @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Consumes(MediaType.APPLICATION_JSON)
     public Customer login(@FormParam("customerName") String customerName, @FormParam("customerPass") String customerPass) {
         OperationResult<Document> result = service.login(customerName, customerPass);
         if(result.isSuccess()) {
