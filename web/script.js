@@ -159,12 +159,12 @@ function updateCartDisplay(items) {
         priceCell.textContent = item.price;
         tr.appendChild(priceCell);
         cartBody.appendChild(tr);
-
     }
 }
 
 function grzegorzSays(string){
-
+    var quote = document.getElementById("gregP");
+    quote.innerHTML = string;
 }
 
 function logIn() {

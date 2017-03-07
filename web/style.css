@@ -89,11 +89,11 @@ td.pTD {
 }
 
 #gregSays {
-    position: relative;
-    top: 30px;
-    border: 1px solid blue;
-    width: 100%;
-    vertical-align: top;
+    margin-top: 10px;
+    padding: 5px;
+    position: fixed;
+    right: 10.2%;
+    left: 74%;
 }
 
 #gregP {
