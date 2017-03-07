@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,9 +24,10 @@ public class ShopService {
     /**
      * Our Servlet session. We will need this for the shopping basket
      */
-    HttpSession session;
+    private HttpSession session;
     private static final Namespace NS = getNamespace("http://www.cs.au.dk/dWebTek/2014");
     private static CloudService service = new CloudService();
+
     public ShopService(@Context HttpServletRequest servletRequest) {
         session = servletRequest.getSession();
     }
@@ -38,9 +40,9 @@ public class ShopService {
     public static void main(String[] args) {
         OperationResult<Document> res = service.listItems();
         System.out.println(res.getResult().getRootElement().getChildren());
-        if(res.isSuccess()) {
+        if (res.isSuccess()) {
             List<Element> itemList = res.getResult().getRootElement().getChildren();
-            for(Element e : itemList) {
+            for (Element e : itemList) {
                 testItemFromElement(e);
             }
         } else {
@@ -61,17 +63,17 @@ public class ShopService {
     @Path("items")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Item> getItems() {
-            ArrayList<Item> items = new ArrayList<>();
-            OperationResult<Document> res = service.listItems();
-            if(res.isSuccess()) {
-                List<Element> itemList = res.getResult().getRootElement().getChildren();
-                for(Element e : itemList) {
-                    items.add(getItemFromElement(e));
-                }
-            } else {
-                System.out.println(res.getMessage());
+        ArrayList<Item> items = new ArrayList<>();
+        OperationResult<Document> res = service.listItems();
+        if (res.isSuccess()) {
+            List<Element> itemList = res.getResult().getRootElement().getChildren();
+            for (Element e : itemList) {
+                items.add(getItemFromElement(e));
             }
-            return items;
+        } else {
+            System.out.println(res.getMessage());
+        }
+        return items;
     }
 
     public Item getItemFromElement(Element e) {
@@ -90,12 +92,68 @@ public class ShopService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Customer login(Login login) {
         OperationResult<Document> result = service.login(login.getUsername(), login.getPassword());
-        if(result.isSuccess()) {
+        if (result.isSuccess()) {
             int id = Integer.parseInt(result.getResult().getRootElement().getChildText("customerID", NS));
+            session.setAttribute("customerID", id);
             return new Customer(id, login.getUsername());
         } else {
             System.out.println(result.getMessage());
             return null;
+        }
+    }
+
+
+    @GET
+    @Path("getCart")
+    @Produces(MediaType.APPLICATION_JSON)
+    public ArrayList<Item> getCart() {
+        if (session.getAttribute("cart") == null) {
+            session.setAttribute("cart", new ArrayList<Item>());
+        }
+        return (ArrayList<Item>) session.getAttribute("cart");
+    }
+
+    @POST
+    @Path("addToCart")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addToCart(Item item) {
+        ArrayList<Item> cart = getCart();
+        cart.add(item);
+        session.setAttribute("cart", cart);
+        return Response.ok().build();
+    }
+
+    @POST
+    @Path("sellItems")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Sale> sellItems() {
+        ArrayList<Sale> sales = new ArrayList<>();
+        ArrayList<Item> cart = getCart();
+        if (session.getAttribute("customerID") != null) {
+            int customerID = (int) session.getAttribute("customerID");
+            for (Item i : cart) {
+                OperationResult<Document> result = service.sellItems(i.getId(), customerID, 1);
+                if (result.isSuccess()) {
+                    sales.add(new Sale(true, result.getResult().getRootElement().getValue()));
+                } else {
+                    sales.add(new Sale(false, result.getMessage()));
+                }
+            }
+        } else {
+             sales.add(new Sale (false, "Please log in"));
+        }
+        return sales;
+    }
+
+    @POST
+    @Path("signUp")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response signUp(Login login) {
+        OperationResult<Document> result = service.login(login.getUsername(), login.getPassword());
+        if(result.isSuccess()) {
+            return Response.ok().build();
+        } else {
+            return Response.status(401).build();
         }
     }
 

@@ -51,12 +51,30 @@ function addItemsToTable(items) {
     }
 }
 
+function sellItems() {
+    for (var i = 0; i < items.length; i++) {
+        var item = items[i];
+    }
+}
+
 function logIn() {
     var u = document.getElementById("brugernavn").value;
     var p = document.getElementById("password").value;
-    var login = {username : u, password : p};
+    var login = {username: u, password: p};
     var body = JSON.stringify(login);
     sendRequest("POST", "rest/shop/login", body, function (customerText) {
+        var costumer = JSON.parse(customerText);
+        costumer.isLoggedIn = true;
+        showCostumer(costumer);
+    });
+}
+
+function signUp() {
+    var u = document.getElementById("brugernavn").value;
+    var p = document.getElementById("password").value;
+    var login = {username: u, password: p};
+    var body = JSON.stringify(login);
+    sendRequest("POST", "rest/shop/signUp", body, function (customerText) {
         var costumer = JSON.parse(customerText);
         showCostumer(costumer);
     });
@@ -64,7 +82,7 @@ function logIn() {
 
 function showCostumer(customer) {
     var text1 = document.getElementById("tester");
-    text1.setAttribute("Value", customer.name);
+    text1.setAttribute("Value", "Welcome " + customer.name);
 }
 
 /////////////////////////////////////////////////////
@@ -93,11 +111,14 @@ else
 function sendRequest(httpMethod, url, body, responseHandler) {
     http.open(httpMethod, url);
     if (httpMethod == "POST") {
-        http.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        http.setRequestHeader("Content-Type", "application/json");
     }
     http.onreadystatechange = function () {
         if (http.readyState == 4 && http.status == 200) {
             responseHandler(http.responseText);
+        }
+        if (http.readyState == 401) {
+
         }
     };
     http.send(body);
