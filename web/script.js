@@ -110,7 +110,7 @@ function addToCart(o) {
     var price = o.parentNode.parentNode.parentNode.childNodes[3].firstChild.firstChild.nodeValue;
     var stock = o.parentNode.parentNode.parentNode.childNodes[4].firstChild.firstChild.nodeValue;
     var description = o.parentNode.parentNode.parentNode.childNodes[5].firstChild.firstChild.nodeValue;
-    var cart = {id: id, name: name, price: price, stock: stock, description: description, URL: ""};
+    var cart = {id: id, name: name, price: price, stock: stock, description: description, url: ""};
     var body = JSON.stringify(cart);
     sendRequest("POST", "rest/shop/addToCart", body, function (response) {
     });

@@ -5,14 +5,17 @@ public class Item {
     private int id;
     private String name;
     private int price;
-    private String URL;
+    private String url;
     private int stock;
     private String description;
 
-    public Item(int id, String name, String URL, int price, int stock, String description) {
+    public Item() {
+    }
+
+    public Item(int id, String name, String url, int price, int stock, String description) {
         this.id = id;
         this.name = name;
-        this.URL = URL;
+        this.url = url;
         this.price = price;
         this.stock = stock;
         this.description = description;
@@ -43,11 +46,11 @@ public class Item {
     }
 
     public String getURL() {
-        return URL;
+        return url;
     }
 
     public void setURL(String URL) {
-        this.URL = URL;
+        this.url = url;
     }
 
     public int getStock() {
