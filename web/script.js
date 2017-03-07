@@ -30,6 +30,14 @@ function addItemsToTable(items) {
         var table = document.createElement("table");
         table.setAttribute("class", "ptable");
 
+        var idTR = document.createElement("tr");
+        idTR.setAttribute("class", "pTR");
+        var idCell = document.createElement("td");
+        idCell.setAttribute("class", "pTD");
+        idCell.textContent = item.id;
+        idTR.appendChild(idCell);
+        table.appendChild(idTR);
+
         var nameTR = document.createElement("tr");
         nameTR.setAttribute("class", "pTR");
         var nameCell = document.createElement("td");
@@ -83,7 +91,7 @@ function addItemsToTable(items) {
         var b = document.createTextNode("Buy");
         btn.appendChild(b);
         btn.onclick = function () {
-            buy()
+            addToCart(this)
         };
         buttonCell.appendChild(btn);
         buttonTR.appendChild(buttonCell);
@@ -96,8 +104,16 @@ function addItemsToTable(items) {
     tableBody.appendChild(tr);
 }
 
-function buy() {
-
+function addToCart(o) {
+    var id = o.parentNode.parentNode.parentNode.childNodes[0].firstChild.firstChild.nodeValue;
+    var name = o.parentNode.parentNode.parentNode.childNodes[1].firstChild.firstChild.nodeValue;
+    var price = o.parentNode.parentNode.parentNode.childNodes[3].firstChild.firstChild.nodeValue;
+    var stock = o.parentNode.parentNode.parentNode.childNodes[4].firstChild.firstChild.nodeValue;
+    var description = o.parentNode.parentNode.parentNode.childNodes[5].firstChild.firstChild.nodeValue;
+    var cart = {id: id, name: name, price: price, stock: stock, description: description, URL: ""};
+    var body = JSON.stringify(cart);
+    sendRequest("POST", "rest/shop/addToCart", body, function (response) {
+    });
 }
 
 function sellItems() {
@@ -130,8 +146,8 @@ function signUp() {
 }
 
 function showCostumer(customer) {
-    var text1 = document.getElementById("tester");
-    text1.setAttribute("Value", "Welcome " + customer.name);
+    var text1 =
+        text1.setAttribute("Value", "Welcome " + customer.name);
 }
 
 /////////////////////////////////////////////////////
