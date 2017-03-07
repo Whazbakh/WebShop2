@@ -1,5 +1,7 @@
 //Run this function when we have loaded the HTML document
-window.onload = function () {
+window.onload = updateTable();
+
+function updateTable () {
     //This code is called when the body element has been loaded and the application starts
 
     //Request items from the server. The server expects no request body, so we set it to null
@@ -7,17 +9,6 @@ window.onload = function () {
         //This code is called when the server has sent its data
         var items = JSON.parse(itemsText);
         addItemsToTable(items);
-    });
-
-    //Register an event listener for button clicks
-    var updateButton = document.getElementById("checkout");
-    addEventListener(updateButton, "click", function () {
-        //Same as above, get the items from the server
-        sendRequest("GET", "rest/shop/items", null, function (itemsText) {
-            //This code is called when the server has sent its data
-            var items = JSON.parse(itemsText);
-            addItemsToTable(items);
-        });
     });
 };
 
@@ -144,8 +135,8 @@ function sellItems() {
                 grzegorzSays("Purchase succesful!");
             }
         }
+        updateTable();
     });
-    updateTable();
 }
 
 function updateCart() {
