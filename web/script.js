@@ -8,6 +8,17 @@ window.onload = function () {
         var items = JSON.parse(itemsText);
         addItemsToTable(items);
     });
+
+    //Register an event listener for button clicks
+    var updateButton = document.getElementById("checkout");
+    addEventListener(updateButton, "click", function () {
+        //Same as above, get the items from the server
+        sendRequest("GET", "rest/shop/items", null, function (itemsText) {
+            //This code is called when the server has sent its data
+            var items = JSON.parse(itemsText);
+            addItemsToTable(items);
+        });
+    });
 };
 
 function addItemsToTable(items) {
@@ -134,6 +145,7 @@ function sellItems() {
             }
         }
     });
+    updateTable();
 }
 
 function updateCart() {
@@ -192,8 +204,7 @@ function signUp() {
 }
 
 function showCostumer(customer) {
-    var text1 =
-        text1.setAttribute("Value", "Welcome " + customer.name);
+    grzegorzSays("Welcome " + customer.name);
 }
 
 /////////////////////////////////////////////////////
