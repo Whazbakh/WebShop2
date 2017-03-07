@@ -114,6 +114,7 @@ function addToCart(o) {
     var body = JSON.stringify(cart);
     sendRequest("POST", "rest/shop/addToCart", body, function (response) {
     });
+    updateCart();
 }
 
 function sellItems() {
@@ -141,11 +142,23 @@ function updateCart() {
 }
 
 function updateCartDisplay(items) {
-    var cartBody = document.getElementById("rightTopFixedDiv");
+    var cartBody = document.getElementById("cartP");
     cartBody.innerHTML = "";
 
     for (var i = 0; i < items.length; i++) {
         var item = items[i];
+        var tr = document.createElement("tr");
+        tr.setAttribute("width", "100%");
+
+        var nameCell = document.createElement("td");
+        nameCell.setAttribute("class", "cTD");
+        nameCell.textContent = item.name;
+        tr.appendChild(nameCell);
+        var priceCell = document.createElement("td");
+        priceCell.setAttribute("class", "cTD");
+        priceCell.textContent = item.price;
+        tr.appendChild(priceCell);
+        cartBody.appendChild(tr);
 
     }
 }
