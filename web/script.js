@@ -51,10 +51,10 @@ function addItemsToTable(items) {
     }
 }
 
-function signUp(o) {
+function logIn(o) {
     var userName = o.parentNode.previousSibling.previousSibling.firstChild.nodeValue;
     var password = o.parentNode.previousSibling.firstChild.nodeValue;
-    var login = '{"username" : "userName", "pass" : "password"}';
+    var login = '{"username" : userName, "password" : password}';
     var jsonLogin = JSON.parse(login);
     sendRequest("POST", "rest/shop/login", jsonLogin, function (customerText) {
         var costumer = JSON.parse(customerText);
