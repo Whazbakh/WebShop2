@@ -98,12 +98,28 @@ function addItemsToTable(items) {
 
 function buy() {
 
+
 }
 
 function sellItems() {
-    for (var i = 0; i < items.length; i++) {
-        var item = items[i];
-    }
+    sendRequest("POST", "rest/shop/sellItems", null, function (saleResponse) {
+        var sales = JSON.parse(saleResponse);
+        for (var i = 0; i < sales.length; i++) {
+            var sale = sales[i];
+            var x = 0;
+            if(sale.succes==false) {
+                grzegorzSays(sale.message);
+                x++;
+            }
+            if(x==0) {
+                grzegorzSays("Purchase succesful!");
+            }
+        }
+    });
+}
+
+function grzegorzSays(string){
+
 }
 
 function logIn() {
@@ -113,7 +129,6 @@ function logIn() {
     var body = JSON.stringify(login);
     sendRequest("POST", "rest/shop/login", body, function (customerText) {
         var costumer = JSON.parse(customerText);
-        costumer.isLoggedIn = true;
         showCostumer(costumer);
     });
 }
