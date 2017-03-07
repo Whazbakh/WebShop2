@@ -104,7 +104,7 @@ public class ShopService {
 
 
     @GET
-    @Path("getCart")
+    @Path("cart")
     @Produces(MediaType.APPLICATION_JSON)
     public ArrayList<Item> getCart() {
         if (session.getAttribute("cart") == null) {

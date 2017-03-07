@@ -2,8 +2,8 @@ package dk.cs.dwebtek;
 
 
 public class Sale {
-    boolean succes;
-    String message;
+    private boolean succes;
+    private String message;
 
     public Sale(boolean succes, String message) {
         this.succes = succes;
