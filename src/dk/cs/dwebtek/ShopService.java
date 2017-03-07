@@ -116,11 +116,12 @@ public class ShopService {
     @POST
     @Path("addToCart")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addToCart(Item item) {
+    @Produces(MediaType.APPLICATION_JSON)
+    public Sale addToCart(Item item) {
         ArrayList<Item> cart = getCart();
         cart.add(item);
         session.setAttribute("cart", cart);
-        return Response.ok().build();
+        return new Sale(true, "Item added to cart");
     }
 
     @POST

@@ -113,8 +113,10 @@ function addToCart(o) {
     var cart = {id: id, name: name, price: price, stock: stock, description: description, url: ""};
     var body = JSON.stringify(cart);
     sendRequest("POST", "rest/shop/addToCart", body, function (response) {
+        var say = JSON.parse(response);
+        grzegorzSays(say.message)
+        updateCart();
     });
-    updateCart();
 }
 
 function sellItems() {
@@ -159,7 +161,6 @@ function updateCartDisplay(items) {
         priceCell.textContent = item.price;
         tr.appendChild(priceCell);
         cartBody.appendChild(tr);
-
     }
 }
 
@@ -211,13 +212,12 @@ function addEventListener(myNode, eventType, myHandlerFunc) {
             });
 }
 
-var http;
-if (!XMLHttpRequest)
-    http = new ActiveXObject("Microsoft.XMLHTTP");
-else
-    http = new XMLHttpRequest();
-
 function sendRequest(httpMethod, url, body, responseHandler) {
+    var http;
+    if (!XMLHttpRequest)
+        http = new ActiveXObject("Microsoft.XMLHTTP");
+    else
+        http = new XMLHttpRequest();
     http.open(httpMethod, url);
     if (httpMethod == "POST") {
         http.setRequestHeader("Content-Type", "application/json");
