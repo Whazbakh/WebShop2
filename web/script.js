@@ -165,7 +165,8 @@ function updateCartDisplay(items) {
 }
 
 function grzegorzSays(string){
-
+    var quote = document.getElementById("gregP");
+    quote.innerHTML = string;
 }
 
 function logIn() {
