@@ -87,3 +87,15 @@ td.pTD {
     vertical-align: top;
     horiz-align: center;
 }
+
+#gregSays {
+    position: relative;
+    top: 30px;
+    border: 1px solid blue;
+    width: 100%;
+    vertical-align: top;
+}
+
+#gregP {
+
+}
