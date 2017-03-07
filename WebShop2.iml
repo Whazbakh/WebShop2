@@ -33,5 +33,14 @@
     <orderEntry type="library" scope="PROVIDED" name="Tomcat 8.5.11" level="application_server_libraries" />
     <orderEntry type="library" name="com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.8.7" level="project" />
     <orderEntry type="library" name="org.json:json:20140107" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../WebTek/cloud/out/artifacts/cloud_jar/cloud.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

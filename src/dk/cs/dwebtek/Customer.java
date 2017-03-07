@@ -4,6 +4,7 @@ public class Customer {
 
     private int id;
     private String name;
+    private boolean isLoggedIn;
 
 
     public Customer(int id, String name) {
@@ -25,6 +26,14 @@ public class Customer {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isLoggedIn() {
+        return isLoggedIn;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        isLoggedIn = loggedIn;
     }
 
 }
