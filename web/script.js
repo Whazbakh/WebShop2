@@ -133,6 +133,23 @@ function sellItems() {
     });
 }
 
+function updateCart() {
+    sendRequest("GET", "rest/shop/cart", null, function (itemsText) {
+        var items = JSON.parse(itemsText);
+        updateCartDisplay(items);
+    });
+}
+
+function updateCartDisplay(items) {
+    var cartBody = document.getElementById("rightTopFixedDiv");
+    cartBody.innerHTML = "";
+
+    for (var i = 0; i < items.length; i++) {
+        var item = items[i];
+
+    }
+}
+
 function grzegorzSays(string){
 
 }
