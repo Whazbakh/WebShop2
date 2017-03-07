@@ -51,10 +51,10 @@ function addItemsToTable(items) {
     }
 }
 
-function logIn(o) {
-    var userName = o.parentNode.previousSibling.previousSibling.firstChild.nodeValue;
-    var password = o.parentNode.previousSibling.firstChild.nodeValue;
-    var login = '{"username" : userName, "password" : password}';
+function logIn() {
+    var u = document.getElementById("brugernavn").value;
+    var p = document.getElementById("password").value;
+    var login = '{"username" : "u", "pass" : "p"}';
     var jsonLogin = JSON.parse(login);
     sendRequest("POST", "rest/shop/login", jsonLogin, function (customerText) {
         var costumer = JSON.parse(customerText);
@@ -62,8 +62,9 @@ function logIn(o) {
     });
 }
 
-function showCostumer(costumer) {
-
+function showCostumer(customer) {
+    var text1 = document.getElementById("tester");
+    text1.setAttribute("Value", customer);
 }
 
 /////////////////////////////////////////////////////
