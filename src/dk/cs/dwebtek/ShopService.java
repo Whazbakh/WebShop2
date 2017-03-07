@@ -88,11 +88,11 @@ public class ShopService {
     @Path("login")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Customer login(@FormParam("customerName") String customerName, @FormParam("customerPass") String customerPass) {
-        OperationResult<Document> result = service.login(customerName, customerPass);
+    public Customer login(Login login) {
+        OperationResult<Document> result = service.login(login.getUsername(), login.getPassword());
         if(result.isSuccess()) {
             int id = Integer.parseInt(result.getResult().getRootElement().getChildText("customerID", NS));
-            return new Customer(id, customerName);
+            return new Customer(id, login.getUsername());
         } else {
             System.out.println(result.getMessage());
             return null;

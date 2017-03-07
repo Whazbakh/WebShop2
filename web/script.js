@@ -54,9 +54,9 @@ function addItemsToTable(items) {
 function logIn() {
     var u = document.getElementById("brugernavn").value;
     var p = document.getElementById("password").value;
-    var login = '{"username" : "u", "pass" : "p"}';
-    var jsonLogin = JSON.parse(login);
-    sendRequest("POST", "rest/shop/login", jsonLogin, function (customerText) {
+    var login = {username : u, password : p};
+    var body = JSON.stringify(login);
+    sendRequest("POST", "rest/shop/login", body, function (customerText) {
         var costumer = JSON.parse(customerText);
         showCostumer(costumer);
     });
@@ -64,7 +64,7 @@ function logIn() {
 
 function showCostumer(customer) {
     var text1 = document.getElementById("tester");
-    text1.setAttribute("Value", customer);
+    text1.setAttribute("Value", customer.name);
 }
 
 /////////////////////////////////////////////////////
