@@ -9,16 +9,17 @@ body {
     background-color: rgb(225, 225, 225);
 }
 
-table {
-    width: 100%;
-}
-
 td {
     text-align: center;
 }
 
 #productTable {
     table-layout: fixed;
+    width: 100%;
+}
+
+table {
+
 }
 
 #titleTR {
@@ -30,13 +31,13 @@ td {
 }
 
 #leftTD {
-    width: 75%;
+    width: 80%;
     border: 1px solid red;
     padding: 2px;
 }
 
 #rightTD {
-    min-width: 25%;
+    min-width: 20%;
     border: 1px solid blue;
 }
 
@@ -44,16 +45,45 @@ td {
     width: 100%;
 }
 
-#rightFixedDiv {
+#rightBottomFixedDiv {
     position: fixed;
     right: 10.2%;
-    left: 70.1%;
+    left: 74%;
     bottom: 0;
 }
 
-#plip {
+#rightTopFixedDiv {
     position: fixed;
     right: 10.2%;
-    left: 70.1%;
+    left: 74%;
     top: 0;
+    border: 1px solid gold;
+    height: auto;
+}
+
+#leftWrapperTR {
+
+}
+
+div.pdiv {
+    display: inline-block;
+    width: 250px;
+    height: 250px;
+    border: 1px solid yellow;
+    padding-bottom: 85px;
+}
+
+table.ptable {
+    table-layout: fixed;
+    width: 100%;
+}
+
+tr.pTR {
+    width: 100%;
+}
+
+td.pTD {
+    width: 100%;
+    vertical-align: top;
+    horiz-align: center;
 }

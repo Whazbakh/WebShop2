@@ -15,40 +15,89 @@ function addItemsToTable(items) {
     var tableBody = document.getElementById("itemtablebody");
     //Remove all contents of the table body (if any exist)
     tableBody.innerHTML = "";
-
+    var tr = document.createElement("tr");
+    tr.setAttribute("width", "100%");
+    var Cell = document.createElement("td");
+    Cell.setAttribute("width", "100%");
+    Cell.setAttribute("height", "100%");
     //Loop through the items from the server
     for (var i = 0; i < items.length; i++) {
         var item = items[i];
         //Create a new line for this item
-        var tr = document.createElement("tr");
+        var div1 = document.createElement("div");
+        div1.setAttribute("class", "pdiv");
 
+        var table = document.createElement("table");
+        table.setAttribute("class", "ptable");
+
+        var nameTR = document.createElement("tr");
+        nameTR.setAttribute("class", "pTR");
+        var nameCell = document.createElement("td");
+        nameCell.setAttribute("class", "pTD");
+        nameCell.textContent = item.name;
+        nameTR.appendChild(nameCell);
+        table.appendChild(nameTR);
+
+        var imageTR = document.createElement("tr");
+        imageTR.setAttribute("class", "pTR");
         var imageCell = document.createElement("td");
+        imageCell.setAttribute("class", "pTD");
         var image = document.createElement("img");
         image.setAttribute("src", item.url);
         image.setAttribute("width", "200");
         image.setAttribute("height", "200");
         image.setAttribute("border", "1px solid blue");
         imageCell.appendChild(image);
-        tr.appendChild(imageCell);
+        imageTR.appendChild(imageCell);
+        table.appendChild(imageTR);
 
-        var nameCell = document.createElement("td");
-        nameCell.textContent = item.name;
-        tr.appendChild(nameCell);
-
+        var priceTR = document.createElement("tr");
+        priceTR.setAttribute("class", "pTR");
         var priceCell = document.createElement("td");
+        priceCell.setAttribute("class", "pTD");
         priceCell.textContent = item.price;
-        tr.appendChild(priceCell);
+        priceTR.appendChild(priceCell);
+        table.appendChild(priceTR);
 
+        var stockTR = document.createElement("tr");
+        stockTR.setAttribute("class", "pTR");
         var stockCell = document.createElement("td");
+        stockCell.setAttribute("class", "pTD");
         stockCell.textContent = item.stock;
-        tr.appendChild(stockCell);
+        stockTR.appendChild(stockCell);
+        table.appendChild(stockTR);
 
+        var descriptionTR = document.createElement("tr");
+        descriptionTR.setAttribute("class", "pTR");
         var descriptionCell = document.createElement("td");
+        descriptionCell.setAttribute("class", "pTD");
         descriptionCell.textContent = item.description;
-        tr.appendChild(descriptionCell);
+        descriptionTR.appendChild(descriptionCell);
+        table.appendChild(descriptionTR);
 
-        tableBody.appendChild(tr);
+        var buttonTR = document.createElement("tr");
+        buttonTR.setAttribute("class", "pTR");
+        var buttonCell = document.createElement("td");
+        buttonCell.setAttribute("class", "pTD");
+        var btn = document.createElement("BUTTON");
+        var b = document.createTextNode("Buy");
+        btn.appendChild(b);
+        btn.onclick = function () {
+            buy()
+        };
+        buttonCell.appendChild(btn);
+        buttonTR.appendChild(buttonCell);
+        table.appendChild(buttonTR);
+
+        div1.appendChild(table);
+        Cell.appendChild(div1);
     }
+    tr.appendChild(Cell);
+    tableBody.appendChild(tr);
+}
+
+function buy() {
+
 }
 
 function sellItems() {
