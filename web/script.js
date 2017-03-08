@@ -1,6 +1,5 @@
 //Run this function when we have loaded the HTML document
-window.onload = updateTable();
-updateCart();
+window.onload = updateTable(); updateCart();
 
 function updateTable() {
     //This code is called when the body element has been loaded and the application starts

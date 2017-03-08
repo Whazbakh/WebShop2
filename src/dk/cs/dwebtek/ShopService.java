@@ -20,9 +20,6 @@ import static org.jdom2.Namespace.getNamespace;
 
 @Path("shop")
 public class ShopService {
-    /**
-     * Our Servlet session. We will need this for the shopping basket
-     */
     private HttpSession session;
     private static final Namespace NS = getNamespace("http://www.cs.au.dk/dWebTek/2014");
     private static CloudService service = new CloudService();
