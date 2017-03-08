@@ -1,7 +1,8 @@
 //Run this function when we have loaded the HTML document
-window.onload = updateTable(); updateCart();
+window.onload = updateTable();
+updateCart();
 
-function updateTable () {
+function updateTable() {
     //This code is called when the body element has been loaded and the application starts
     //Request items from the server. The server expects no request body, so we set it to null
     sendRequest("GET", "rest/shop/items", null, function (itemsText) {
@@ -27,15 +28,16 @@ function addItemsToTable(items) {
         //Create a new line for this item
         var div1 = document.createElement("div");
         div1.setAttribute("class", "pdiv");
-
         var table = document.createElement("table");
         table.setAttribute("class", "ptable");
 
         var idTR = document.createElement("tr");
         idTR.setAttribute("class", "pTR");
+        idTR.setAttribute("id", "idTRID");
         var idCell = document.createElement("td");
         idCell.setAttribute("class", "pTD");
-        idCell.setAttribute("colspan", "2");
+        idCell.setAttribute("id", "idID");
+        idCell.setAttribute("colspan", "3");
         idCell.textContent = item.id;
         idTR.appendChild(idCell);
         table.appendChild(idTR);
@@ -44,7 +46,7 @@ function addItemsToTable(items) {
         nameTR.setAttribute("class", "pTR");
         var nameCell = document.createElement("td");
         nameCell.setAttribute("class", "pTD");
-        nameCell.setAttribute("colspan", "2");
+        nameCell.setAttribute("colspan", "3");
         nameCell.textContent = item.name;
         nameTR.appendChild(nameCell);
         table.appendChild(nameTR);
@@ -53,11 +55,12 @@ function addItemsToTable(items) {
         imageTR.setAttribute("class", "pTR");
         var imageCell = document.createElement("td");
         imageCell.setAttribute("class", "pTD");
-        imageCell.setAttribute("colspan", "2");
+        imageCell.setAttribute("colspan", "3");
         var image = document.createElement("img");
         image.setAttribute("src", item.url);
         image.setAttribute("width", "200");
         image.setAttribute("height", "200");
+        image.setAttribute("id", "imageID");
         imageCell.appendChild(image);
         imageTR.appendChild(imageCell);
         table.appendChild(imageTR);
@@ -69,9 +72,15 @@ function addItemsToTable(items) {
         priceCell.textContent = "Price:";
         var priceCell1 = document.createElement("td");
         priceCell1.setAttribute("class", "pTD1");
+        priceCell1.setAttribute("style", "text-align: right;");
         priceCell1.textContent = item.price;
+        var priceCell2 = document.createElement("td");
+        priceCell2.setAttribute("class", "pTD1");
+        priceCell2.setAttribute("style", "text-align: left;");
+        priceCell2.textContent = "$";
         priceTR.appendChild(priceCell);
         priceTR.appendChild(priceCell1);
+        priceTR.appendChild(priceCell2);
         table.appendChild(priceTR);
 
         var stockTR = document.createElement("tr");
@@ -81,16 +90,22 @@ function addItemsToTable(items) {
         stockCell.textContent = "Stock:";
         var stockCell1 = document.createElement("td");
         stockCell1.setAttribute("class", "pTD1");
+        stockCell1.setAttribute("style", "text-align: right;");
         stockCell1.textContent = item.stock;
+        var stockCell2 = document.createElement("td");
+        stockCell2.setAttribute("class", "pTD1");
+        stockCell2.textContent = "";
         stockTR.appendChild(stockCell);
         stockTR.appendChild(stockCell1);
         table.appendChild(stockTR);
 
         var descriptionTR = document.createElement("tr");
         descriptionTR.setAttribute("class", "pTR");
+        descriptionTR.setAttribute("id", "dTRID");
         var descriptionCell = document.createElement("td");
         descriptionCell.setAttribute("class", "pTD");
-        descriptionCell.setAttribute("colspan", "2");
+        descriptionCell.setAttribute("id", "dTDID");
+        descriptionCell.setAttribute("colspan", "3");
         descriptionCell.textContent = item.description;
         descriptionTR.appendChild(descriptionCell);
         table.appendChild(descriptionTR);
@@ -99,7 +114,7 @@ function addItemsToTable(items) {
         buttonTR.setAttribute("class", "pTR");
         var buttonCell = document.createElement("td");
         buttonCell.setAttribute("class", "pTD");
-        buttonCell.setAttribute("colspan", "2");
+        buttonCell.setAttribute("colspan", "3");
         var btn = document.createElement("BUTTON");
         var b = document.createTextNode("Buy");
         btn.appendChild(b);
@@ -139,12 +154,12 @@ function sellItems() {
         for (var i = 0; i < sales.length; i++) {
             var sale = sales[i];
             var x = 0;
-            if(sale.succes==false) {
+            if (sale.succes == false) {
                 string = string.concat(sale.message + "\n");
-                x=x+1;
+                x = x + 1;
             }
-            if(x===0) {
-                string =("Purchase succesful!");
+            if (x === 0) {
+                string = ("Purchase succesful!");
                 emptyCart();
             }
         }
@@ -169,25 +184,33 @@ function updateCart() {
 function updateCartDisplay(items) {
     var cartBody = document.getElementById("cartP");
     cartBody.innerHTML = "";
-
+    var total = 0;
     for (var i = 0; i < items.length; i++) {
         var item = items[i];
+        total = total + (item.price*item.amount);
+        document.getElementById("totalID").innerHTML = total + "$";
         var tr = document.createElement("tr");
         tr.setAttribute("width", "100%");
+
+        var amountCell = document.createElement("td");
+        amountCell.setAttribute("class", "cTD");
+        amountCell.textContent = item.amount;
+        tr.appendChild(amountCell);
 
         var nameCell = document.createElement("td");
         nameCell.setAttribute("class", "cTD");
         nameCell.textContent = item.name;
         tr.appendChild(nameCell);
+
         var priceCell = document.createElement("td");
         priceCell.setAttribute("class", "cTD");
-        priceCell.textContent = item.price;
+        priceCell.textContent = item.price + "$";
         tr.appendChild(priceCell);
         cartBody.appendChild(tr);
     }
 }
 
-function grzegorzSays(string){
+function grzegorzSays(string) {
     var quote = document.getElementById("gregP");
     quote.innerHTML = string;
 }
@@ -236,23 +259,6 @@ function showCostumer(customer) {
     tr.appendChild(Cell3);
     table.appendChild(tr);
     Cell1.appendChild(table);
-}
-
-/////////////////////////////////////////////////////
-// Code from slides
-/////////////////////////////////////////////////////
-
-/**
- * A function that can add event listeners in any browser
- */
-function addEventListener(myNode, eventType, myHandlerFunc) {
-    if (myNode.addEventListener)
-        myNode.addEventListener(eventType, myHandlerFunc, false);
-    else
-        myNode.attachEvent("on" + eventType,
-            function (event) {
-                myHandlerFunc.call(myNode, event);
-            });
 }
 
 function sendRequest(httpMethod, url, body, responseHandler) {

@@ -103,7 +103,7 @@ public class ShopService {
     @Path("addToCart")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Sale addToCart(Item item) {
+    public ShopResponse addToCart(Item item) {
         HashMap<Integer, Item> cart = getCartMap();
         int id = item.getId();
         if(cart.containsKey(id)) {
@@ -114,7 +114,7 @@ public class ShopService {
             cart.put(item.getId(), item);
         }
         session.setAttribute("cart", cart);
-        return new Sale(true, "Item added to cart");
+        return new ShopResponse(true, "Item added to cart");
     }
 
     @GET
@@ -127,8 +127,8 @@ public class ShopService {
     @POST
     @Path("sellItems")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Sale> sellItems() {
-        ArrayList<Sale> sales = new ArrayList<>();
+    public List<ShopResponse> sellItems() {
+        ArrayList<ShopResponse> shopResponses = new ArrayList<>();
         Collection<Item> cart = getCartMap().values();
         if (session.getAttribute("customerID") != null) {
             int customerID = (int) session.getAttribute("customerID");
@@ -137,30 +137,30 @@ public class ShopService {
                 if (result.isSuccess()) {
                     Element response = result.getResult().getRootElement();
                     if(response.getChild("ok",NS)!=null) {
-                        sales.add(new Sale(true, response.getValue()));
+                        shopResponses.add(new ShopResponse(true, response.getValue()));
                     } else {
-                        sales.add(new Sale(false, "Item " + i.getName() + " has insufficient stock"));
+                        shopResponses.add(new ShopResponse(false, "Item " + i.getName() + " has insufficient stock"));
                     }
                 } else {
-                    sales.add(new Sale(false, result.getMessage()));
+                    shopResponses.add(new ShopResponse(false, result.getMessage()));
                 }
             }
         } else {
-             sales.add(new Sale (false, "Please log in. Did you think you could just buy stuff without telling me your name?"));
+             shopResponses.add(new ShopResponse(false, "Please log in. Did you think you could just buy stuff without telling me your name?"));
         }
-        return sales;
+        return shopResponses;
     }
 
     @POST
     @Path("signUp")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Sale signUp(Login login) {
+    public ShopResponse signUp(Login login) {
         OperationResult<Document> result = service.createCustomer(login.getUsername(), login.getPassword());
         if(result.isSuccess()) {
-            return new Sale(true, "User" + login.getUsername()+ " created succesfully.");
+            return new ShopResponse(true, "User" + login.getUsername()+ " created succesfully.");
         } else {
-            return new Sale(false, "Username already taken");
+            return new ShopResponse(false, "Username already taken");
         }
     }
 }
