@@ -8,6 +8,7 @@ public class Item {
     private String url;
     private int stock;
     private String description;
+    private int amount = 1;
 
     public Item() {
     }
@@ -21,6 +22,13 @@ public class Item {
         this.description = description;
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
     public int getId() {
         return id;
     }
@@ -45,11 +53,11 @@ public class Item {
         this.price = price;
     }
 
-    public String getURL() {
+    public String getUrl() {
         return url;
     }
 
-    public void setURL(String URL) {
+    public void setUrl(String URL) {
         this.url = url;
     }
 

@@ -37,28 +37,6 @@ public class ShopService {
      */
     private static int priceChange = 0;
 
-    public static void main(String[] args) {
-        OperationResult<Document> res = service.listItems();
-        System.out.println(res.getResult().getRootElement().getChildren());
-        if (res.isSuccess()) {
-            List<Element> itemList = res.getResult().getRootElement().getChildren();
-            for (Element e : itemList) {
-                testItemFromElement(e);
-            }
-        } else {
-            System.out.println(res.getMessage());
-        }
-    }
-
-    public static void testItemFromElement(Element e) {
-        System.out.println(e.getChildText("itemID", NS));
-        System.out.println(e.getChildText("itemName", NS));
-        System.out.println(e.getChildText("itemURL", NS));
-        System.out.println(e.getChildText("itemPrice", NS));
-        System.out.println(e.getChildText("itemStock", NS));
-        System.out.println(e.getChild("itemDescription", NS).getValue());
-    }
-
     @GET
     @Path("items")
     @Produces(MediaType.APPLICATION_JSON)
@@ -86,6 +64,13 @@ public class ShopService {
         return new Item(id, name, URL, price, stock, description);
     }
 
+    @GET
+    @Path("logOut")
+    public Response logOut(){
+        session.setAttribute("customerID", null);
+        return Response.ok().build();
+    }
+
     @POST
     @Path("login")
     @Produces(MediaType.APPLICATION_JSON)
@@ -101,7 +86,6 @@ public class ShopService {
             return null;
         }
     }
-
 
     @GET
     @Path("cart")
@@ -156,12 +140,13 @@ public class ShopService {
     @POST
     @Path("signUp")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response signUp(Login login) {
-        OperationResult<Document> result = service.login(login.getUsername(), login.getPassword());
+    @Produces(MediaType.APPLICATION_JSON)
+    public Sale signUp(Login login) {
+        OperationResult<Document> result = service.createCustomer(login.getUsername(), login.getPassword());
         if(result.isSuccess()) {
-            return Response.ok().build();
+            return new Sale(true, "User" + login.getUsername()+ " created succesfully.");
         } else {
-            return Response.status(401).build();
+            return new Sale(false, "Username already taken");
         }
     }
 
