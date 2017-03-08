@@ -3,7 +3,6 @@ window.onload = updateTable();
 
 function updateTable () {
     //This code is called when the body element has been loaded and the application starts
-
     //Request items from the server. The server expects no request body, so we set it to null
     sendRequest("GET", "rest/shop/items", null, function (itemsText) {
         //This code is called when the server has sent its data
