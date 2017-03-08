@@ -145,7 +145,6 @@ function sellItems() {
             }
         }
     });
-    updateTable();
 }
 
 function updateCart() {

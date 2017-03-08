@@ -36,7 +36,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/cloud.jar!/" />
+          <root url="jar://$MODULE_DIR$/../cloud/out/artifacts/cloud_jar/cloud.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
