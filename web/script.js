@@ -1,5 +1,5 @@
 //Run this function when we have loaded the HTML document
-window.onload = updateTable();
+window.onload = updateTable(); updateCart();
 
 function updateTable () {
     //This code is called when the body element has been loaded and the application starts
@@ -122,21 +122,22 @@ function addToCart(o) {
 
 function sellItems() {
     sendRequest("POST", "rest/shop/sellItems", null, function (saleResponse) {
-
         var sales = JSON.parse(saleResponse);
+        var string = "";
         for (var i = 0; i < sales.length; i++) {
             var sale = sales[i];
             var x = 0;
             if(sale.succes==false) {
-                grzegorzSays(sale.message);
+                string = string.concat(sale.message + "\n");
                 x=x+1;
             }
             if(x===0) {
-                grzegorzSays("Purchase succesful!");
+                string =("Purchase succesful!");
+                emptyCart();
             }
         }
+        grzegorzSays(string);
         updateTable();
-        emptyCart();
     });
 }
 
@@ -213,7 +214,9 @@ function showCostumer(customer) {
     var b = document.createTextNode("Logout");
     btn.appendChild(b);
     btn.onclick = function () {
-        window.location.reload();
+        sendRequest("GET", "rest/shop/logOut", null, function (response) {
+            window.location.reload();
+        });
     };
     Cell2.innerHTML = "You are logged in as " + customer.name;
     Cell3.appendChild(btn);

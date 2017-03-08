@@ -5,9 +5,6 @@ import dk.cs.au.dwebtek.OperationResult;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.Namespace;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.*;
@@ -15,6 +12,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 import static org.jdom2.Namespace.getNamespace;
@@ -31,11 +30,6 @@ public class ShopService {
     public ShopService(@Context HttpServletRequest servletRequest) {
         session = servletRequest.getSession();
     }
-
-    /**
-     * Make the price increase per request (for the sake of example)
-     */
-    private static int priceChange = 0;
 
     @GET
     @Path("items")
@@ -90,11 +84,19 @@ public class ShopService {
     @GET
     @Path("cart")
     @Produces(MediaType.APPLICATION_JSON)
-    public ArrayList<Item> getCart() {
+    public Collection<Item> getCart() {
         if (session.getAttribute("cart") == null) {
-            session.setAttribute("cart", new ArrayList<Item>());
+            session.setAttribute("cart", new HashMap<Integer, Item>());
         }
-        return (ArrayList<Item>) session.getAttribute("cart");
+        HashMap<Integer, Item> cart = (HashMap<Integer, Item>) session.getAttribute("cart");
+        return cart.values();
+    }
+
+    public HashMap<Integer, Item> getCartMap() {
+        if (session.getAttribute("cart") == null) {
+            session.setAttribute("cart", new HashMap<Integer, Item>());
+        }
+        return (HashMap<Integer, Item>) session.getAttribute("cart");
     }
 
     @POST
@@ -102,8 +104,15 @@ public class ShopService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Sale addToCart(Item item) {
-        ArrayList<Item> cart = getCart();
-        cart.add(item);
+        HashMap<Integer, Item> cart = getCartMap();
+        int id = item.getId();
+        if(cart.containsKey(id)) {
+            Item i = cart.get(id);
+            i.setAmount(i.getAmount()+1);
+            cart.replace(id,i);
+        } else {
+            cart.put(item.getId(), item);
+        }
         session.setAttribute("cart", cart);
         return new Sale(true, "Item added to cart");
     }
@@ -120,13 +129,18 @@ public class ShopService {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Sale> sellItems() {
         ArrayList<Sale> sales = new ArrayList<>();
-        ArrayList<Item> cart = getCart();
+        Collection<Item> cart = getCartMap().values();
         if (session.getAttribute("customerID") != null) {
             int customerID = (int) session.getAttribute("customerID");
             for (Item i : cart) {
-                OperationResult<Document> result = service.sellItems(i.getId(), customerID, 1);
+                OperationResult<Document> result = service.sellItems(i.getId(), customerID, i.getAmount());
                 if (result.isSuccess()) {
-                    sales.add(new Sale(true, result.getResult().getRootElement().getValue()));
+                    Element response = result.getResult().getRootElement();
+                    if(response.getChild("ok",NS)!=null) {
+                        sales.add(new Sale(true, response.getValue()));
+                    } else {
+                        sales.add(new Sale(false, "Item " + i.getName() + " has insufficient stock"));
+                    }
                 } else {
                     sales.add(new Sale(false, result.getMessage()));
                 }
@@ -149,32 +163,4 @@ public class ShopService {
             return new Sale(false, "Username already taken");
         }
     }
-
-    @GET
-    @Path("items/manual")
-    public String getItemsConstructedManually() {
-        //You should get the items from the cloud server.
-        //In the template we just construct some simple data as an array of objects
-        //Here we output construct the JSON manually
-        JSONArray array = new JSONArray();
-
-        JSONObject jsonObject1 = new JSONObject();
-        jsonObject1.put("id", 1);
-        jsonObject1.put("name", "Stetson hat");
-        jsonObject1.put("price", 300 + priceChange);
-        array.put(jsonObject1);
-
-        JSONObject jsonObject2 = new JSONObject();
-        jsonObject2.put("id", 2);
-        jsonObject2.put("name", "Rifle");
-        jsonObject2.put("price", 500 + priceChange);
-        array.put(jsonObject2);
-
-        priceChange++;
-
-        //You can create a MessageBodyWriter so you don't have to call toString() every time
-        return array.toString();
-    }
-
-
 }
