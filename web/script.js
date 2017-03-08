@@ -196,9 +196,9 @@ function signUp() {
     var p = document.getElementById("password").value;
     var login = {username: u, password: p};
     var body = JSON.stringify(login);
-    sendRequest("POST", "rest/shop/signUp", body, function (customerText) {
-        var costumer = JSON.parse(customerText);
-        showCostumer(costumer);
+    sendRequest("POST", "rest/shop/signUp", body, function (response) {
+        var user = JSON.parse(response);
+        grzegorzSays(user.message);
     });
 }
 
