@@ -17,7 +17,7 @@
             <input type="text" value="Brugernavn" id="brugernavn">
             <input type="password" value="Password" id="password">
             <button id="login" onclick="logIn()">Login</button>
-            <button id="signUp" onclick="">Sign Up</button>
+            <button id="signUp" onclick="signUp()">Sign Up</button>
         </td>
     </tr>
     <tr id="outerTR">
@@ -44,10 +44,11 @@
                             <div id="rightTopFixedDiv">
                                 <table id="cartP"></table>
                                 <button id="checkout" onclick="sellItems()">Checkout</button>
+                                <button id="emptyCart" onclick="emptyCart()">Empty cart</button>
                             </div>
                             <div id="rightBottomFixedDiv">
                                 <div id="gregSays">
-                                    <p id="gregP"></p>
+                                    <p id="gregP">Welcome to my garage!</p>
                                 </div>
                                 <img id="Greg" src="https://s1.postimg.org/knkp06rhr/gregssidehj_lper.jpg"
                                      alt="Grzegorz">
