@@ -99,17 +99,6 @@ function addItemsToTable(items) {
         stockTR.appendChild(stockCell1);
         table.appendChild(stockTR);
 
-        var descriptionTR = document.createElement("tr");
-        descriptionTR.setAttribute("class", "pTR");
-        descriptionTR.setAttribute("id", "dTRID");
-        var descriptionCell = document.createElement("td");
-        descriptionCell.setAttribute("class", "pTD");
-        descriptionCell.setAttribute("id", "dTDID");
-        descriptionCell.setAttribute("colspan", "3");
-        descriptionCell.textContent = item.description;
-        descriptionTR.appendChild(descriptionCell);
-        table.appendChild(descriptionTR);
-
         var buttonTR = document.createElement("tr");
         buttonTR.setAttribute("class", "pTR");
         var buttonCell = document.createElement("td");
@@ -124,6 +113,17 @@ function addItemsToTable(items) {
         buttonCell.appendChild(btn);
         buttonTR.appendChild(buttonCell);
         table.appendChild(buttonTR);
+
+        var descriptionTR = document.createElement("tr");
+        descriptionTR.setAttribute("class", "pTR");
+        descriptionTR.setAttribute("id", "dTRID");
+        var descriptionCell = document.createElement("td");
+        descriptionCell.setAttribute("class", "pTD");
+        descriptionCell.setAttribute("id", "dTDID");
+        descriptionCell.setAttribute("colspan", "3");
+        descriptionCell.textContent = item.description;
+        descriptionTR.appendChild(descriptionCell);
+        table.appendChild(descriptionTR);
 
         div1.appendChild(table);
         Cell.appendChild(div1);
@@ -142,7 +142,7 @@ function addToCart(o) {
     var body = JSON.stringify(cart);
     sendRequest("POST", "rest/shop/addToCart", body, function (response) {
         var say = JSON.parse(response);
-        grzegorzSays(say.message)
+        grzegorzSays(say.message);
         updateCart();
     });
 }
