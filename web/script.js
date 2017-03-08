@@ -169,12 +169,12 @@ function updateCart() {
 function updateCartDisplay(items) {
     var cartBody = document.getElementById("cartP");
     cartBody.innerHTML = "";
-
+    var total = 0;
     for (var i = 0; i < items.length; i++) {
         var item = items[i];
+        total = total + (item.price*item.amount);
         var tr = document.createElement("tr");
         tr.setAttribute("width", "100%");
-
         var nameCell = document.createElement("td");
         nameCell.setAttribute("class", "cTD");
         nameCell.textContent = item.name;
@@ -236,23 +236,6 @@ function showCostumer(customer) {
     tr.appendChild(Cell3);
     table.appendChild(tr);
     Cell1.appendChild(table);
-}
-
-/////////////////////////////////////////////////////
-// Code from slides
-/////////////////////////////////////////////////////
-
-/**
- * A function that can add event listeners in any browser
- */
-function addEventListener(myNode, eventType, myHandlerFunc) {
-    if (myNode.addEventListener)
-        myNode.addEventListener(eventType, myHandlerFunc, false);
-    else
-        myNode.attachEvent("on" + eventType,
-            function (event) {
-                myHandlerFunc.call(myNode, event);
-            });
 }
 
 function sendRequest(httpMethod, url, body, responseHandler) {
