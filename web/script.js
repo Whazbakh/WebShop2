@@ -157,10 +157,10 @@ function sellItems() {
                 string = string.concat(sale.message + "\n");
                 x = x + 1;
             }
-            if (x === 0) {
-                string = ("Purchase succesful!");
-                emptyCart();
-            }
+        }
+        if (x === 0) {
+            string = ("Purchase succesful!");
+            emptyCart();
         }
         grzegorzSays(string);
         updateTable();
