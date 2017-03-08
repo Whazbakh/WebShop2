@@ -50,6 +50,7 @@ table {
     right: 10.2%;
     left: 74%;
     bottom: 0;
+    z-index: 1;
 }
 
 #rightTopFixedDiv {
@@ -59,6 +60,7 @@ table {
     top: 0;
     border: 1px solid gold;
     height: auto;
+    z-index: 2;
 }
 
 #leftWrapperTR {
