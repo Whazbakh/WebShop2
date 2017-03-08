@@ -123,19 +123,27 @@ function addToCart(o) {
 
 function sellItems() {
     sendRequest("POST", "rest/shop/sellItems", null, function (saleResponse) {
+
         var sales = JSON.parse(saleResponse);
         for (var i = 0; i < sales.length; i++) {
             var sale = sales[i];
             var x = 0;
             if(sale.succes==false) {
                 grzegorzSays(sale.message);
-                x++;
+                x=x+1;
             }
-            if(x==0) {
+            if(x===0) {
                 grzegorzSays("Purchase succesful!");
             }
         }
         updateTable();
+        emptyCart();
+    });
+}
+
+function emptyCart() {
+    sendRequest("GET", "rest/shop/emptyCart", null, function (response) {
+        updateCart();
     });
 }
 

@@ -124,6 +124,13 @@ public class ShopService {
         return new Sale(true, "Item added to cart");
     }
 
+    @GET
+    @Path("emptyCart")
+    public Response emptyCart(){
+        session.setAttribute("cart", null);
+        return Response.ok().build();
+    }
+
     @POST
     @Path("sellItems")
     @Produces(MediaType.APPLICATION_JSON)
@@ -141,7 +148,7 @@ public class ShopService {
                 }
             }
         } else {
-             sales.add(new Sale (false, "Please log in"));
+             sales.add(new Sale (false, "Please log in. Did you think you could just buy stuff without telling me your name?"));
         }
         return sales;
     }
