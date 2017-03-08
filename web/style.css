@@ -88,6 +88,7 @@ div.pdiv {
     margin-right: 5px;
     margin-top: 2px;
     margin-bottom: 2px;
+    transition: all 1s;
 }
 
 table.ptable {
@@ -129,10 +130,16 @@ td.pTD1 {
     visibility: collapse;
 }
 
-#imageID:hover {
-
-}
-
 #total {
     width: 100%;
+}
+
+div.pdiv:hover #dTRID{
+    visibility: visible;
+    transition-delay: .5s;
+}
+
+div.pdiv:hover {
+    padding-bottom: 100px;
+    transition: all 1s;
 }
