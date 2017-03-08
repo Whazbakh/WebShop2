@@ -47,9 +47,21 @@
                     <tr>
                         <td class="rightInnerTD">
                             <div id="rightTopFixedDiv">
+                                <p>Shopping Cart</p>
                                 <button id="checkout" onclick="sellItems()">Checkout</button>
                                 <button id="emptyCart" onclick="emptyCart()">Empty cart</button>
-                                <table id="cartP"></table>
+                                <table id="cartP">
+                                </table>
+                                <table id="total">
+                                    <tr>
+                                        <td style="visibility: hidden">usynlig</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left">Total Price:</td>
+                                        <td></td>
+                                        <td id="totalID" style="text-align: right"></td>
+                                    </tr>
+                                </table>
                             </div>
                             <div id="rightBottomFixedDiv">
                                 <div id="gregSays">

@@ -7,8 +7,8 @@ body {
     width: 80%;
     margin: auto;
     background: linear-gradient(
-            rgba(225, 225, 225, 0.2),
-            rgba(225, 225, 225, 0.2)
+            rgba(225, 225, 225, .1),
+            rgba(225, 225, 225, .1)
     ),
     url(https://s13.postimg.org/c3qwsedk7/brick_1837112_1920.jpg);
     background-size: 100%;
@@ -69,7 +69,7 @@ table {
     left: 74%;
     top: 0;
     border: 1px solid gold;
-    background-color: rgba(225, 225, 225, 0.6);
+    background-color: rgba(225, 225, 225, .6);
     height: auto;
     z-index: 2;
 }
@@ -82,8 +82,8 @@ div.pdiv {
     display: inline-block;
     width: 250px;
     height: 250px;
-    padding-bottom: 100px;
-    background-color: rgba(225, 225, 225, 0.6);
+    padding-bottom: 55px;
+    background-color: rgba(225, 225, 225, .6);
     margin-left: 5px;
     margin-right: 5px;
     margin-top: 2px;
@@ -119,4 +119,20 @@ td.pTD1 {
 
 #gregP {
 
+}
+
+#idTRID {
+    visibility: collapse;
+}
+
+#dTRID {
+    visibility: collapse;
+}
+
+#imageID:hover {
+
+}
+
+#total {
+    width: 100%;
 }
