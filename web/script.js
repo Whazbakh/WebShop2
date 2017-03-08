@@ -35,6 +35,7 @@ function addItemsToTable(items) {
         idTR.setAttribute("class", "pTR");
         var idCell = document.createElement("td");
         idCell.setAttribute("class", "pTD");
+        idCell.setAttribute("colspan", "2");
         idCell.textContent = item.id;
         idTR.appendChild(idCell);
         table.appendChild(idTR);
@@ -43,6 +44,7 @@ function addItemsToTable(items) {
         nameTR.setAttribute("class", "pTR");
         var nameCell = document.createElement("td");
         nameCell.setAttribute("class", "pTD");
+        nameCell.setAttribute("colspan", "2");
         nameCell.textContent = item.name;
         nameTR.appendChild(nameCell);
         table.appendChild(nameTR);
@@ -51,11 +53,11 @@ function addItemsToTable(items) {
         imageTR.setAttribute("class", "pTR");
         var imageCell = document.createElement("td");
         imageCell.setAttribute("class", "pTD");
+        imageCell.setAttribute("colspan", "2");
         var image = document.createElement("img");
         image.setAttribute("src", item.url);
         image.setAttribute("width", "200");
         image.setAttribute("height", "200");
-        image.setAttribute("border", "1px solid blue");
         imageCell.appendChild(image);
         imageTR.appendChild(imageCell);
         table.appendChild(imageTR);
@@ -63,23 +65,32 @@ function addItemsToTable(items) {
         var priceTR = document.createElement("tr");
         priceTR.setAttribute("class", "pTR");
         var priceCell = document.createElement("td");
-        priceCell.setAttribute("class", "pTD");
-        priceCell.textContent = item.price;
+        priceCell.setAttribute("class", "pTD1");
+        priceCell.textContent = "Price:";
+        var priceCell1 = document.createElement("td");
+        priceCell1.setAttribute("class", "pTD1");
+        priceCell1.textContent = item.price;
         priceTR.appendChild(priceCell);
+        priceTR.appendChild(priceCell1);
         table.appendChild(priceTR);
 
         var stockTR = document.createElement("tr");
         stockTR.setAttribute("class", "pTR");
         var stockCell = document.createElement("td");
-        stockCell.setAttribute("class", "pTD");
-        stockCell.textContent = item.stock;
+        stockCell.setAttribute("class", "pTD1");
+        stockCell.textContent = "Stock:";
+        var stockCell1 = document.createElement("td");
+        stockCell1.setAttribute("class", "pTD1");
+        stockCell1.textContent = item.stock;
         stockTR.appendChild(stockCell);
+        stockTR.appendChild(stockCell1);
         table.appendChild(stockTR);
 
         var descriptionTR = document.createElement("tr");
         descriptionTR.setAttribute("class", "pTR");
         var descriptionCell = document.createElement("td");
         descriptionCell.setAttribute("class", "pTD");
+        descriptionCell.setAttribute("colspan", "2");
         descriptionCell.textContent = item.description;
         descriptionTR.appendChild(descriptionCell);
         table.appendChild(descriptionTR);
@@ -88,6 +99,7 @@ function addItemsToTable(items) {
         buttonTR.setAttribute("class", "pTR");
         var buttonCell = document.createElement("td");
         buttonCell.setAttribute("class", "pTD");
+        buttonCell.setAttribute("colspan", "2");
         var btn = document.createElement("BUTTON");
         var b = document.createTextNode("Buy");
         btn.appendChild(b);
@@ -108,8 +120,8 @@ function addItemsToTable(items) {
 function addToCart(o) {
     var id = o.parentNode.parentNode.parentNode.childNodes[0].firstChild.firstChild.nodeValue;
     var name = o.parentNode.parentNode.parentNode.childNodes[1].firstChild.firstChild.nodeValue;
-    var price = o.parentNode.parentNode.parentNode.childNodes[3].firstChild.firstChild.nodeValue;
-    var stock = o.parentNode.parentNode.parentNode.childNodes[4].firstChild.firstChild.nodeValue;
+    var price = o.parentNode.parentNode.parentNode.childNodes[3].childNodes[1].firstChild.nodeValue;
+    var stock = o.parentNode.parentNode.parentNode.childNodes[4].childNodes[1].firstChild.nodeValue;
     var description = o.parentNode.parentNode.parentNode.childNodes[5].firstChild.firstChild.nodeValue;
     var cart = {id: id, name: name, price: price, stock: stock, description: description, url: ""};
     var body = JSON.stringify(cart);
