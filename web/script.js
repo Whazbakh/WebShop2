@@ -10,7 +10,7 @@ function updateTable () {
         var items = JSON.parse(itemsText);
         addItemsToTable(items);
     });
-};
+}
 
 function addItemsToTable(items) {
     //Get the table body we we can add items to it
