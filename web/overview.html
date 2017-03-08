@@ -12,12 +12,18 @@
             <img src="https://s24.postimg.org/65j45jvxx/Untitled_2.jpg" alt="Titel" width="100%">
         </td>
     </tr>
-    <tr>
-        <td>
-            <input type="text" value="Brugernavn" id="brugernavn">
-            <input type="password" value="Password" id="password">
-            <button id="login" onclick="logIn()">Login</button>
-            <button id="signUp" onclick="signUp()">Sign Up</button>
+    <tr id="loginTR">
+        <td id="loginTD">
+            <table>
+                <tr>
+                    <td>
+                        <input type="text" value="Brugernavn" id="brugernavn">
+                        <input type="password" value="Password" id="password">
+                        <button id="login" onclick="logIn()">Login</button>
+                        <button id="signUp" onclick="signUp()">Sign Up</button>
+                    </td>
+                </tr>
+            </table>
         </td>
     </tr>
     <tr id="outerTR">
@@ -42,9 +48,9 @@
                     <tr>
                         <td class="rightInnerTD">
                             <div id="rightTopFixedDiv">
-                                <table id="cartP"></table>
                                 <button id="checkout" onclick="sellItems()">Checkout</button>
                                 <button id="emptyCart" onclick="emptyCart()">Empty cart</button>
+                                <table id="cartP"></table>
                             </div>
                             <div id="rightBottomFixedDiv">
                                 <div id="gregSays">

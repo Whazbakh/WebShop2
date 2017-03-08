@@ -9,7 +9,7 @@ function updateTable () {
         var items = JSON.parse(itemsText);
         addItemsToTable(items);
     });
-};
+}
 
 function addItemsToTable(items) {
     //Get the table body we we can add items to it
@@ -203,6 +203,24 @@ function signUp() {
 
 function showCostumer(customer) {
     grzegorzSays("Welcome " + customer.name);
+    var Cell1 = document.getElementById("loginTD");
+    Cell1.innerHTML = "";
+    var table = document.createElement("tr");
+    var tr = document.createElement("tr");
+    var Cell2 = document.createElement("td");
+    var Cell3 = document.createElement("td");
+    var btn = document.createElement("BUTTON");
+    var b = document.createTextNode("Logout");
+    btn.appendChild(b);
+    btn.onclick = function () {
+        window.location.reload();
+    };
+    Cell2.innerHTML = "You are logged in as " + customer.name;
+    Cell3.appendChild(btn);
+    tr.appendChild(Cell2);
+    tr.appendChild(Cell3);
+    table.appendChild(tr);
+    Cell1.appendChild(table);
 }
 
 /////////////////////////////////////////////////////
