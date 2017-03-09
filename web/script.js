@@ -239,7 +239,7 @@ function signUp() {
 
 function showCostumer(customer) {
     grzegorzSays("Welcome " + customer.name);
-    var Cell1 = document.getElementById("loginTD");
+    var Cell1 = document.getElementById("outerDiv");
     Cell1.innerHTML = "";
     var table = document.createElement("tr");
     var tr = document.createElement("tr");

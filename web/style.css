@@ -10,6 +10,7 @@ body {
             rgba(225, 225, 225, .1)
     ),
     url(https://s13.postimg.org/c3qwsedk7/brick_1837112_1920.jpg);
+    width: 100%;
 }
 
 #outerTable {
@@ -27,10 +28,6 @@ td {
 
 #productTable {
     table-layout: fixed;
-
-}
-
-table {
 
 }
 
@@ -62,16 +59,12 @@ table {
     position: fixed;
     right: 10.2%;
     left: 74%;
-    top: 0;
+    top: 4px;
     border: 3px solid goldenrod;
     color: white;
     background: url("https://s27.postimg.org/9gs5pyyg3/cartbg.jpg");
     height: auto;
     z-index: 2;
-}
-
-#leftWrapperTR {
-
 }
 
 div.pdiv {
@@ -117,7 +110,7 @@ td.pTD1 {
 }
 
 #gregP {
-
+padding-top: 5px;
 }
 
 #idTRID {
@@ -138,7 +131,6 @@ div.pdiv:hover #dTRID {
 }
 
 div.pdiv:hover {
-    padding: 10px;
     padding-bottom: 100px;
     transition: all 1s;
 }
