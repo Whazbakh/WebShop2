@@ -44,12 +44,13 @@ td {
 
 #Greg {
     width: 100%;
+
 }
 
 #rightBottomFixedDiv {
     position: fixed;
     right: 10.2%;
-    left: 74%;
+    left: 73.9%;
     bottom: -10px;
     margin-top: 5px;
     z-index: 1;
@@ -80,6 +81,7 @@ div.pdiv {
     border: 2px solid darkslategray;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
     transition: all 1s;
+    vertical-align: top;
 }
 
 table.ptable {
@@ -94,11 +96,11 @@ tr.pTR {
 td.pTD {
     width: 100%;
     vertical-align: top;
-    horiz-align: center;
 }
 
 td.pTD1 {
     max-width: 50%;
+    vertical-align: top;
 }
 
 #gregSays {
