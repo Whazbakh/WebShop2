@@ -6,77 +6,87 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<table id="outerTable">
-    <tr id="titleTR">
-        <td id="titleTD">
-            <img src="https://s24.postimg.org/65j45jvxx/Untitled_2.jpg" alt="Titel" width="100%">
-        </td>
-    </tr>
-    <tr id="loginTR">
-        <td id="loginTD">
-            <table>
-                <tr>
-                    <td>
-                        <input type="text" value="Brugernavn" id="brugernavn">
-                        <input type="password" value="Password" id="password">
-                        <button id="login" onclick="logIn()">Login</button>
-                        <button id="signUp" onclick="signUp()">Sign Up</button>
+<table id="outerWrapperTable">
+    <tr>
+        <td>
+            <table id="outerInnerWrapperception">
+                <tr class="wrapperTR">
+                    <td class="wrapperTD">
+                        <img src="https://s1.postimg.org/ww225jehr/gg2.jpg" alt="Titleimage"><br>
+                        <p style="font-size: large">Grzegorz has opened up the doors to his famous garage,
+                            <br> and everything in it is for sale, even his grandmother.</p>
+                        <br>
+                        <div style="text-align: center; width: 100%;">
+                        <div id="outerDiv">
+                            <input type="text" value="Brugernavn" id="brugernavn">
+                            <input type="password" value="Password" id="password">
+                            <button id="login" onclick="logIn()">Login</button>
+                            <button id="signUp" onclick="signUp()">Sign Up</button>
+                        </div>
+                        </div>
                     </td>
                 </tr>
             </table>
         </td>
     </tr>
-    <tr id="outerTR">
-        <td id="leftTD">
-            <div class="wrapperDiv">
-                <table class="wrapperTable" id="productTable">
-                    <thead>
-                    <tr id="leftWrapperTR">
-                    </tr>
-                    </thead>
+    <tr>
+        <td>
+            <table id="outerTable">
+                <tr id="outerTR">
+                    <td id="leftTD">
+                        <div class="wrapperDiv">
+                            <table class="wrapperTable" id="productTable">
+                                <thead>
+                                <tr id="leftWrapperTR">
+                                </tr>
+                                </thead>
 
-                    <tbody id="itemtablebody">
+                                <tbody id="itemtablebody">
 
-                    </tbody>
-                </table>
-            </div>
-        </td>
-        <td id="rightTD">
-            <div class="wrapperDiv">
-                <table class="wrapperTable">
-                    <tr>
-                        <td class="rightInnerTD">
-                            <div id="rightTopFixedDiv">
-                                <p>Shopping Cart</p>
-                                <button id="checkout" onclick="sellItems()">Checkout</button>
-                                <button id="emptyCart" onclick="emptyCart()">Empty cart</button>
-                                <table id="cartP">
-                                </table>
-                                <table id="total">
-                                    <tr>
-                                        <td style="visibility: hidden">usynlig</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align: left">Total Price:</td>
-                                        <td></td>
-                                        <td id="totalID" style="text-align: right"></td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div id="rightBottomFixedDiv">
-                                <div id="gregSays">
-                                    <p id="gregP">Welcome to my garage!</p>
-                                </div>
-                                <img id="Greg" src="https://s1.postimg.org/knkp06rhr/gregssidehj_lper.jpg"
-                                     alt="Grzegorz">
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+                                </tbody>
+                            </table>
+                        </div>
+                    </td>
+                    <td id="rightTD">
+                        <div class="wrapperDiv">
+                            <table class="wrapperTable">
+                                <tr>
+                                    <td class="rightInnerTD">
+                                        <div id="rightTopFixedDiv">
+                                            <p>Shopping Cart</p>
+                                            <button id="checkout" onclick="sellItems()">Checkout</button>
+                                            <button id="emptyCart" onclick="emptyCart()">Empty cart</button>
+                                            <table id="cartP">
+                                            </table>
+                                            <table id="total">
+                                                <tr>
+                                                    <td style="visibility: hidden">usynlig</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align: left">Total Price:</td>
+                                                    <td></td>
+                                                    <td id="totalID" style="text-align: right"></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div id="rightBottomFixedDiv">
+                                            <div id="gregSays">
+                                                <p id="gregP">Welcome to my garage!</p>
+                                            </div>
+                                            <img id="Greg"
+                                                 src="https://s9.postimg.org/5fcy73cen/gregssidehj_lper.jpg"
+                                                 alt="Grzegorz"
+                                                 style="margin-top: 10px;">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </td>
     </tr>
 </table>
-
 </body>
 </html>

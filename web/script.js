@@ -168,6 +168,7 @@ function sellItems() {
 }
 
 function emptyCart() {
+    document.getElementById("totalID").innerHTML = "0$";
     sendRequest("GET", "rest/shop/emptyCart", null, function (response) {
         updateCart();
     });
